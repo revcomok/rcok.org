@@ -284,6 +284,14 @@
             font-size: 24px;
         }
         
+        /* Anchor link offset solution */
+        .anchor {
+            display: block;
+            position: relative;
+            top: -80px;
+            visibility: hidden;
+        }
+        
         /* Responsive */
         @media (max-width: 980px) {
             .row {
@@ -315,6 +323,10 @@
             .hero p {
                 font-size: 24px;
             }
+            
+            .anchor {
+                top: -120px; /* Adjust for taller header on mobile */
+            }
         }
         
         @media (max-width: 767px) {
@@ -333,6 +345,10 @@
             .button-large {
                 font-size: 18px;
                 padding: 12px 24px;
+            }
+            
+            .anchor {
+                top: -160px; /* Adjust for even taller header on smaller mobile */
             }
         }
     </style>
@@ -371,9 +387,9 @@
         </div>
     </section>
 
-    <div id="about" style="position: relative; bottom: 50px;"></div><!-- This is a hack for page-navigation purposes. -->
-
-    <!-- Main Content -->
+    <!-- About Section -->
+    <!-- Anchor tag for navigation -->
+    <span id="about" class="anchor"></span>
     <section class="section">
         <div class="container">
             <h1>Are you ready to fight?</h1>
@@ -390,13 +406,16 @@
         </div>
     </section>
 
+    <!-- Join Section -->
+    <!-- Anchor tag for navigation -->
+    <span id="join" class="anchor"></span>
     <section class="section">
-        <div class="container" id="join">
+        <div class="container">
             <h1>Build the Party of the Revolutionary Communists of Oklahoma</h1>
             <p>Neither major US party is coming to save us.  In order to fight and win, we need to build a revolutionary communist party!  That is why we have launched the Revolutionary Communists of Oklahoma (RCOK), affiliated with (but not endorsed by) the <a href="https://communistusa.org">Revolutionary Communists of America</a>, part of the worldwide <a href="https://marxist.com">Revolutionary Communist International</a>, which is active in over 70 countries around the world.</p>
             <p>There are thousands of revolutionary communists in Oklahoma ready to organize and fight for revolution.  If you're a socialist or communist and you're committed to the overthrow of capitalism in our lifetime, then the Revolutionary Communists of Oklahoma is <i>your</i> party. Now is the time for <i>action!</i></p>
             <p>Join today to become a founding<!-- Not for long! --> member of the RCOK and help organize your friends, family, coworkers, and neighbors into the fight for socialist revolution!</p>
-            <p>To join, sign up with RCA (Revolutionary Communists of America) at <a href="https://communistusa.org">communistusa.org</a></p>
+            <p>To join, sign up with RCA (Revolutionary Communists of America) at <a href="https://communistusa.org/join/">communistusa.org/join</a></p>
             <p>Email us at <a href="mailto:contact@rcok.org">contact@rcok.org</a></p>
             <p><small>More methods to join will be shared soon.</small></p>
         </div>
@@ -418,5 +437,29 @@
             <p>Not endorsed by the <a href="communistusa.org">Revolutionary Communists of America</a> or the <a href="marxist.com">Revolutionary Communist International</a>.</p>
         </div>
     </footer>
+
+    <script>
+        // Optional: JavaScript to dynamically adjust anchor offsets based on actual header height
+        // This would handle cases where header height changes unpredictably
+        document.addEventListener('DOMContentLoaded', function() {
+            function adjustAnchors() {
+                const headerHeight = document.querySelector('.header').offsetHeight;
+                const anchors = document.querySelectorAll('.anchor');
+                
+                // Add a little extra padding for comfort
+                const offset = headerHeight + 20;
+                
+                anchors.forEach(function(anchor) {
+                    anchor.style.top = `-${offset}px`;
+                });
+            }
+            
+            // Adjust on load
+            adjustAnchors();
+            
+            // Adjust on resize (for when header might change size)
+            window.addEventListener('resize', adjustAnchors);
+        });
+    </script>
 </body>
 </html>
